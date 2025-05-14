@@ -22,7 +22,7 @@ async def main():
     dp = Dispatcher(storage=RedisStorage(redis=redis))
     register_client_handlers(dp)
 
-    yandex_gpt = YandexGPT(token=config.yandex_gpt.token, model=config.yandex_gpt.model)
+    yandex_gpt = YandexGPT(token=config.yandex_gpt.token, model_uri=config.yandex_gpt.model_uri)
 
     bot = Bot(token=config.bot.token)
 

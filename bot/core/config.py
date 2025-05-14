@@ -29,7 +29,7 @@ class Redis:
 @dataclass()
 class YandexGPT:
     token: str
-    model: str
+    model_uri: str
 
 
 @dataclass()
@@ -51,7 +51,7 @@ def get_config(path: str):
         ),
         yandex_gpt=YandexGPT(
             token=env.str("YANDEX_GPT_TOKEN"),
-            model=env.str("YANDEX_GPT_MODEL"),
+            model_uri=env.str("YANDEX_GPT_MODEL_URI"),
         ),
         db=Database(
             name=env.str("DB_NAME"),

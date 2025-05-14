@@ -24,7 +24,7 @@ async def process_ask_handler(message: types.Message, state: FSMContext, bot: Bo
     else:
         messages = []
 
-    messages.append({"role": "user", "content": prompt})
+    messages.append({"role": "user", "text": prompt})
 
     async with ChatActionSender.typing(bot=bot, chat_id=message.chat.id):
         try:
