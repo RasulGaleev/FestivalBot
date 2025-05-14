@@ -29,7 +29,7 @@ async def process_ask_handler(message: types.Message, state: FSMContext, bot: Bo
     async with ChatActionSender.typing(bot=bot, chat_id=message.chat.id):
         try:
             answer = await yandex_gpt.generate_text(messages=messages)
-            messages.append({"role": "assistant", "content": answer})
+            messages.append({"role": "assistant", "text": answer})
             await state.update_data(messages=messages)
             await write_answer(chat_id=message.chat.id, answer=answer, bot=bot)
 
