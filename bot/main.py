@@ -13,7 +13,7 @@ from core.services import YandexGPT, GSheet
 async def main():
     logging.basicConfig(
         level=logging.INFO,
-        filename="bot.log",
+        # filename="bot.log",
         format="%(asctime)s - [%(levelname)s]: %(message)s",
     )
 

@@ -7,5 +7,5 @@ kb_question = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text="Кто участвует", web_app=WebAppInfo(url="https://teatr.mos.ru/"))],
     [InlineKeyboardButton(text="Детям можно", web_app=WebAppInfo(url="https://teatr.mos.ru/"))],
     [InlineKeyboardButton(text="Места общепита", web_app=WebAppInfo(url="https://teatr.mos.ru/"))],
-    [InlineKeyboardButton(text="Назад", callback_data="menu")],
+    [InlineKeyboardButton(text="⬅️Назад", callback_data="menu")],
 ])

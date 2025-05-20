@@ -7,5 +7,5 @@ kb_platform = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text="Новопушкинский сквер", web_app=WebAppInfo(url="https://teatr.mos.ru/"))],
     [InlineKeyboardButton(text="Покровский бульвар", web_app=WebAppInfo(url="https://teatr.mos.ru/"))],
     [InlineKeyboardButton(text="Чистопрудный бульвар", web_app=WebAppInfo(url="https://teatr.mos.ru/"))],
-    [InlineKeyboardButton(text="Назад", callback_data="menu")],
+    [InlineKeyboardButton(text="⬅️Назад", callback_data="menu")],
 ])
