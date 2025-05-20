@@ -33,9 +33,16 @@ class YandexGPT:
 
 
 @dataclass()
+class GSheet:
+    creds_path: str
+    spreadsheet_id: str
+
+
+@dataclass()
 class Settings:
     bot: Bot
     yandex_gpt: YandexGPT
+    gsheet: GSheet
     db: Database
     redis: Redis
 
@@ -52,6 +59,10 @@ def get_config(path: str):
         yandex_gpt=YandexGPT(
             token=env.str("YANDEX_GPT_TOKEN"),
             model_uri=env.str("YANDEX_GPT_MODEL_URI"),
+        ),
+        gsheet=GSheet(
+            creds_path=env.str("GSHEET_CREDS_PATH"),
+            spreadsheet_id=env.str("GSHEET_SPREADSHEET_ID"),
         ),
         db=Database(
             name=env.str("DB_NAME"),
