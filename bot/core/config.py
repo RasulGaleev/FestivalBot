@@ -11,15 +11,6 @@ class Bot:
 
 
 @dataclass()
-class Database:
-    name: str
-    user: str
-    password: str
-    host: str
-    port: str
-
-
-@dataclass()
 class Redis:
     host: str
     port: int
@@ -43,7 +34,6 @@ class Settings:
     bot: Bot
     yandex_gpt: YandexGPT
     gsheet: GSheet
-    db: Database
     redis: Redis
 
 
@@ -63,13 +53,6 @@ def get_config(path: str):
         gsheet=GSheet(
             creds_path=env.str("GSHEET_CREDS_PATH"),
             spreadsheet_id=env.str("GSHEET_SPREADSHEET_ID"),
-        ),
-        db=Database(
-            name=env.str("DB_NAME"),
-            user=env.str("DB_USER"),
-            password=env.str("DB_PASS"),
-            host=env.str("DB_HOST"),
-            port=env.str("DB_PORT"),
         ),
         redis=Redis(
             host=env.str("REDIS_HOST"),
