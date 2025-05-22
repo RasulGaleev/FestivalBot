@@ -1,11 +1,19 @@
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
+from typing import List, Dict
 
-kb_platform = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text="Амфитеатр на Покровском бульваре", web_app=WebAppInfo(url="https://teatr.mos.ru/"))],
-    [InlineKeyboardButton(text="Музейный парк «Политех»", web_app=WebAppInfo(url="https://teatr.mos.ru/"))],
-    [InlineKeyboardButton(text="Патриаршие пруды", web_app=WebAppInfo(url="https://teatr.mos.ru/"))],
-    [InlineKeyboardButton(text="Новопушкинский сквер", web_app=WebAppInfo(url="https://teatr.mos.ru/"))],
-    [InlineKeyboardButton(text="Покровский бульвар", web_app=WebAppInfo(url="https://teatr.mos.ru/"))],
-    [InlineKeyboardButton(text="Чистопрудный бульвар", web_app=WebAppInfo(url="https://teatr.mos.ru/"))],
-    [InlineKeyboardButton(text="⬅️Назад", callback_data="menu")],
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.utils.keyboard import InlineKeyboardBuilder
+
+kb_platform_menu = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text="Расписание мероприятий", callback_data="schedule")],
+    [InlineKeyboardButton(text="Как добраться и план площадки", callback_data="infrastructure")],
+    [InlineKeyboardButton(text="⬅️Назад", callback_data="platform")],
 ])
+
+
+def get_kb_platform(platforms: List[Dict[str, str]]) -> InlineKeyboardMarkup:
+    kb = InlineKeyboardBuilder()
+    for p in platforms:
+        kb.button(text=p['title'], callback_data=f"platform:{p['id']}")
+    kb.button(text="⬅️Назад", callback_data="menu")
+    kb.adjust(1)
+    return kb.as_markup()

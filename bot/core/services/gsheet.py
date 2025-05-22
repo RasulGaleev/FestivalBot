@@ -33,7 +33,7 @@ class GSheet:
         )
         return result.get('values', [])
 
-    async def get_date_list(self, start_row: int = 8):
+    async def get_event_dates(self, start_row: int = 8):
         range_str = f'{self.sheet_name}!A{start_row}:M'
         result = await asyncio.to_thread(
             self.service.spreadsheets().values().get(
@@ -64,7 +64,7 @@ class GSheet:
         unique_dates = sorted(set(parsed_dates))
         return [dt.strftime('%d.%m.%Y') for dt in unique_dates]
 
-    async def get_event_list_by_date(self, date: str, start_row: int = 8):
+    async def get_events_by_date(self, date: str, start_row: int = 8):
         range_str = f'{self.sheet_name}!A{start_row}:N'
         result = await asyncio.to_thread(
             self.service.spreadsheets().values().get(
