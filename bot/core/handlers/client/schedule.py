@@ -11,6 +11,6 @@ async def schedule_handler(query: types.CallbackQuery, gsheet: GSheet) -> None:
 
 async def schedule_date_handler(query: types.CallbackQuery, gsheet: GSheet) -> None:
     date = query.data.split(":")[-1]
-    titles = await gsheet.get_title_by_date(date)
-    await query.message.answer(f"Мероприятия на {date}:", reply_markup=get_kb_schedule_titles(titles))
+    events = await gsheet.get_event_list_by_date(date)
+    await query.message.answer(f"Мероприятия на {date}:", reply_markup=get_kb_schedule_titles(events))
     await query.message.delete()

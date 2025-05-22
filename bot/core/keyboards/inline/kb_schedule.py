@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 
 from aiogram.types import InlineKeyboardMarkup, WebAppInfo
 from aiogram.utils.keyboard import InlineKeyboardBuilder
@@ -13,10 +13,10 @@ def get_kb_schedule_date(dates: List[str]) -> InlineKeyboardMarkup:
     return kb.as_markup()
 
 
-def get_kb_schedule_titles(titles: List[str]) -> InlineKeyboardMarkup:
+def get_kb_schedule_titles(events: List[Dict[str, str]]) -> InlineKeyboardMarkup:
     kb = InlineKeyboardBuilder()
-    for t in titles:
-        kb.button(text=t, web_app=WebAppInfo(url="https://teatr.mos.ru/"))
+    for e in events:
+        kb.button(text=e['title'], web_app=WebAppInfo(url=e['url']))
     kb.button(text="⬅️Назад", callback_data="schedule")
     kb.adjust(1)
     return kb.as_markup()

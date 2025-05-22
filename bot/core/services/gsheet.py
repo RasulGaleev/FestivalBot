@@ -64,8 +64,8 @@ class GSheet:
         unique_dates = sorted(set(parsed_dates))
         return [dt.strftime('%d.%m.%Y') for dt in unique_dates]
 
-    async def get_title_by_date(self, date: str, start_row: int = 8):
-        range_str = f'{self.sheet_name}!A{start_row}:M'
+    async def get_event_list_by_date(self, date: str, start_row: int = 8):
+        range_str = f'{self.sheet_name}!A{start_row}:N'
         result = await asyncio.to_thread(
             self.service.spreadsheets().values().get(
                 spreadsheetId=self.spreadsheet_id,
@@ -74,10 +74,10 @@ class GSheet:
             ).execute
         )
         values = result.get('values', [])
-        titles = []
+        items = []
 
         for row in values:
-            if len(row) < 13:
+            if len(row) < 14:
                 continue
 
             date_str = row[0].strip()
@@ -86,7 +86,8 @@ class GSheet:
             if date_str != date or status != 'Проверено':
                 continue
 
-            title = row[4].strip() if len(row) >= 5 else ''
-            titles.append(title)
+            title = row[4].strip()
+            url = row[13].strip()
+            items.append({"title": title, "url": url})
 
-        return titles
+        return items
