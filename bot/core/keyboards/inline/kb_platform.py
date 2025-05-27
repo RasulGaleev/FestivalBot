@@ -1,19 +1,19 @@
-from typing import List, Dict
+from typing import List
 
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 kb_platform_menu = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text="Расписание мероприятий", callback_data="schedule")],
-    [InlineKeyboardButton(text="Как добраться и план площадки", callback_data="infrastructure")],
+    [InlineKeyboardButton(text="Расписание мероприятий", callback_data="platform_schedule")],
+    [InlineKeyboardButton(text="Как добраться и план площадки", callback_data="platform_infrastructure")],
     [InlineKeyboardButton(text="⬅️Назад", callback_data="platform")],
 ])
 
 
-def get_kb_platform(platforms: List[Dict[str, str]]) -> InlineKeyboardMarkup:
+def get_kb_platform(platforms: List[str]) -> InlineKeyboardMarkup:
     kb = InlineKeyboardBuilder()
-    for p in platforms:
-        kb.button(text=p['title'], callback_data=f"platform:{p['id']}")
+    for i in range(len(platforms)):
+        kb.button(text=platforms[i], callback_data=f"platform:{i}")
     kb.button(text="⬅️Назад", callback_data="menu")
     kb.adjust(1)
     return kb.as_markup()
