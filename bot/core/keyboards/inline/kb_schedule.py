@@ -16,7 +16,7 @@ def get_kb_schedule_date(dates: List[str]) -> InlineKeyboardMarkup:
 def get_kb_schedule_events(events: List[Dict[str, str]], back_data="schedule") -> InlineKeyboardMarkup:
     kb = InlineKeyboardBuilder()
     for e in events:
-        kb.button(text=e['title'], web_app=WebAppInfo(url=e['url']))
+        kb.button(text=e['title'], web_app=WebAppInfo(url=e.get('url') or "https://teatr.mos.ru/"))
     kb.button(text="⬅️Назад", callback_data=back_data)
     kb.adjust(1)
     return kb.as_markup()

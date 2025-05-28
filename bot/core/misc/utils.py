@@ -1,11 +1,5 @@
 from datetime import datetime
-from typing import List, Dict
-
-
-def get_unique_dates(events: List[Dict]) -> List[str]:
-    dates = {event['date'] for event in events}
-    sorted_dates = sorted(dates, key=lambda d: datetime.strptime(d, '%d.%m.%Y'))
-    return sorted_dates
+from typing import List, Dict, Optional
 
 
 def get_unique_platforms(events: List[Dict]) -> List[Dict[str, str | int]]:
@@ -14,9 +8,13 @@ def get_unique_platforms(events: List[Dict]) -> List[Dict[str, str | int]]:
     return sorted_locations
 
 
-def get_events_by_date(events: List[Dict], target_date: str) -> List[Dict]:
-    return [event for event in events if event['date'] == target_date]
+def get_unique_dates(events: List[Dict], platform: Optional[str] = None) -> List[str]:
+    filtered_events = ([event for event in events if event.get('platform') == platform] if platform else events)
+    dates = {event['date'] for event in filtered_events}
+    sorted_dates = sorted(dates, key=lambda d: datetime.strptime(d, '%d.%m.%Y'))
+    return sorted_dates
 
 
-def get_events_by_platform(events: List[Dict], platform: str) -> List[Dict]:
-    return [event for event in events if event['platform'] == platform]
+def get_filtered_events(events: List[Dict], date: str, platform: Optional[str] = None) -> List[Dict]:
+    return [event for event in events if event['date'] == date and (
+            platform is None or event.get('platform') == platform)]
