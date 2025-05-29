@@ -23,7 +23,7 @@ async def main():
     register_client_handlers(dp)
 
     yandex_gpt = YandexGPT(token=config.yandex_gpt.token, model_uri=config.yandex_gpt.model_uri)
-    gsheet = GSheet(creds_path=config.gsheet.creds_path, spreadsheet_id=config.gsheet.spreadsheet_id)
+    gsheet = GSheet(creds_path=config.gsheet.creds_path, spreadsheet_id=config.gsheet.spreadsheet_id, redis=redis)
     await gsheet.authorize()
 
     bot = Bot(token=config.bot.token)
