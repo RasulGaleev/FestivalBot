@@ -34,7 +34,7 @@ class GSheet:
         self.service = build('sheets', 'v4', credentials=credentials, cache_discovery=False)
 
     async def fetch_sheet_values(self, sheet_name: str, start_row: int) -> List[List[str]]:
-        range_str = f'{sheet_name}!A{start_row}:O'
+        range_str = f'{sheet_name}!A{start_row}:P'
         result = await asyncio.to_thread(
             lambda: self.service.spreadsheets().values().get(
                 spreadsheetId=self.spreadsheet_id,
@@ -65,8 +65,8 @@ class GSheet:
                 date_str = row[0].strip()
                 platform = row[3 + index].strip() if len(row) > 3 + index else ''
                 title = row[4 + index].strip() if len(row) > 4 + index else ''
-                status = row[12 + index].strip() if len(row) > 12 + index else ''
-                url = row[13 + index].strip() if len(row) > 13 + index else ''
+                status = row[12 + (index + 1 if index else 0)].strip() if len(row) > 12 + index else ''
+                url = row[13 + (index + 1 if index else 0)].strip() if len(row) > 13 + index else ''
 
                 if status != 'Проверено':
                     continue
