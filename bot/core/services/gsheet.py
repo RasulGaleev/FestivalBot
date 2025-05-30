@@ -62,14 +62,15 @@ class GSheet:
                 if len(row) < 14 + index:
                     continue
 
+                sheet_index = index + 1 if index else 0
+                status = row[12 + sheet_index].strip() if len(row) > 12 + sheet_index else ''
+                if status != 'Проверено':
+                    continue
+
                 date_str = row[0].strip()
                 platform = row[3 + index].strip() if len(row) > 3 + index else ''
                 title = row[4 + index].strip() if len(row) > 4 + index else ''
-                status = row[12 + (index + 1 if index else 0)].strip() if len(row) > 12 + index else ''
-                url = row[13 + (index + 1 if index else 0)].strip() if len(row) > 13 + index else ''
-
-                if status != 'Проверено':
-                    continue
+                url = row[13 + sheet_index].strip() if len(row) > 13 + sheet_index else ''
 
                 try:
                     datetime.strptime(date_str, '%d.%m.%Y')
