@@ -9,8 +9,9 @@ from core.states import AskStates
 from .ask import ask_handler, process_ask_handler
 from .menu import start_handler, menu_handler
 from .platform import platform_handler, platform_filter_handler, platform_infrastructure_handler
-from .question import question_handler
+from .faq import faq_handler, faq_message_handler
 from .schedule import schedule_handler, schedule_filter_handler
+from .rules import rules_handler, rules_message_handler
 
 
 def register_client_handlers(router: Router) -> None:
@@ -22,5 +23,8 @@ def register_client_handlers(router: Router) -> None:
     router.callback_query.register(platform_infrastructure_handler, F.data == "platform_infrastructure")
     router.callback_query.register(schedule_handler, F.data == "schedule")
     router.callback_query.register(schedule_filter_handler, F.data.startswith('schedule:'))
-    router.callback_query.register(question_handler, F.data == "question")
     router.callback_query.register(ask_handler, F.data == 'ask')
+    router.callback_query.register(faq_handler, F.data == 'faq')
+    router.callback_query.register(faq_message_handler, F.data.startswith('faq:'))
+    router.callback_query.register(rules_handler, F.data == 'rules')
+    router.callback_query.register(rules_message_handler, F.data.startswith('rules:'))

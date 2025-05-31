@@ -1,0 +1,27 @@
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+
+kb_faq = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text="Где проходит фестиваль?", callback_data="faq:where_is_festival")],
+    [InlineKeyboardButton(text="Сколько длится фестиваль?", callback_data="faq:festival_duration")],
+    [InlineKeyboardButton(text="Где найти карту площадок?", callback_data="faq:where_to_find_map")],
+    [InlineKeyboardButton(text="Как добраться до площадки?", callback_data="faq:how_to_get_there")],
+    [InlineKeyboardButton(text="Нужны ли билеты?", callback_data="faq:tickets_required")],
+    [InlineKeyboardButton(text="Где купить билеты?", callback_data="faq:where_to_buy_tickets")],
+    [InlineKeyboardButton(text="Нужна ли регистрация?", callback_data="faq:registration_require")],
+    [InlineKeyboardButton(text="Как устроена рассадка?", callback_data="faq:seating_info")],
+    [InlineKeyboardButton(text="Когда открываются площадки?", callback_data="faq:when_venues_open")],
+    [InlineKeyboardButton(text="Можно остаться на следующий спектакль?", callback_data="faq:stay_between_shows")],
+    [InlineKeyboardButton(text="Можно приходить с детьми?", callback_data="faq:can_bring_children")],
+    [InlineKeyboardButton(text="Будут мастер-классы?", callback_data="faq:will_be_workshops")],
+    [InlineKeyboardButton(text="Будет ли съёмка? Где фото?", callback_data="faq:will_be_photography")],
+    [InlineKeyboardButton(text="Как по сотрудничать?", callback_data="faq:how_to_collaborate")],
+    [InlineKeyboardButton(text="Где найти афишу?", callback_data="faq:where_is_schedule")],
+    [InlineKeyboardButton(text="Telegram-канал фестиваля", callback_data="faq:telegram_channel")],
+    [InlineKeyboardButton(text="Какие правила на площадках?", callback_data="faq:venue_rules")],
+    [InlineKeyboardButton(text="Можно с животными?", callback_data="faq:can_bring_animals")],
+    [InlineKeyboardButton(text="Расписание работы площадок", callback_data="faq:venue_schedule")],
+    [InlineKeyboardButton(text="Можно ли с едой?", callback_data="faq:can_bring_food")],
+    [InlineKeyboardButton(text="Можно ли с напитками?", callback_data="faq:can_bring_drinks")],
+    [InlineKeyboardButton(text="Забыли зонт или дождевик?", callback_data="faq:no_umbrella")],
+    [InlineKeyboardButton(text="⬅️ Назад", callback_data="menu")],
+])

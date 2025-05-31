@@ -1,6 +1,10 @@
+import logging
+import os
+
 from aiogram import types
 from aiogram.fsm.context import FSMContext
-from core.keyboards import get_kb_platform, kb_platform_menu, get_kb_schedule_events
+from aiogram.types import FSInputFile
+from core.keyboards import get_kb_platform, kb_platform_menu, get_kb_back
 from core.messages import platform_message, platform_map
 from core.misc import get_unique_platforms
 from core.services import GSheet
@@ -24,6 +28,13 @@ async def platform_filter_handler(query: types.CallbackQuery, state: FSMContext)
     await query.message.delete()
 
 
-async def platform_infrastructure_handler(query: types.CallbackQuery) -> None:
-    await query.message.answer("Инфрастуктура фестиваля")
+async def platform_infrastructure_handler(query: types.CallbackQuery, state: FSMContext) -> None:
+    data = await state.get_data()
+    try:
+        platform = data['platform']
+        await query.message.answer_photo(photo=FSInputFile(os.path.join("core", "assets", "platforms", f"{platform}.png")),
+                                         caption="План площадки:")
+    except Exception as ex:
+        logging.error(ex)
+        await query.message.answer("Возникла ошибка при получении плана площадки...")
     await query.answer()

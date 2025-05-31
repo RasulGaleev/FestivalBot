@@ -1,5 +1,7 @@
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
-kb_back = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text="⬅️Назад", callback_data="menu")]
-])
+
+def get_kb_back(callback_data: str = "menu") -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="⬅️ Назад", callback_data=callback_data)]
+    ])

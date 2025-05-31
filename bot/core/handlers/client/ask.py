@@ -4,13 +4,13 @@ from asyncio import sleep
 from aiogram import types, Bot
 from aiogram.fsm.context import FSMContext
 from aiogram.utils.chat_action import ChatActionSender
-from core.keyboards import kb_back
+from core.keyboards import get_kb_back
 from core.services import YandexGPT
 from core.states import AskStates
 
 
 async def ask_handler(query: types.CallbackQuery, state: FSMContext) -> None:
-    await query.message.answer(text="Задать вопрос:", reply_markup=kb_back)
+    await query.message.answer(text="Задать вопрос:", reply_markup=get_kb_back())
     await state.set_state(AskStates.waiting_for_ask)
     await query.message.delete()
 
